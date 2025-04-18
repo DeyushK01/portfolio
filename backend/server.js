@@ -18,14 +18,20 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, '../')));
 
 // Database Configuration
-const sequelize = new Sequelize(process.env.DATABASE_URL || 'postgres://localhost:5432/portfolio', {
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
     dialect: 'postgres',
     protocol: 'postgres',
     dialectOptions: {
-        ssl: process.env.NODE_ENV === 'production' ? {
+        ssl: {
             require: true,
             rejectUnauthorized: false
-        } : false
+        }
+    },
+    pool: {
+        max: 5,
+        min: 0,
+        acquire: 30000,
+        idle: 10000
     }
 });
 
@@ -92,14 +98,23 @@ app.post('/api/contact', async (req, res) => {
     }
 });
 
+// Add error handling middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ 
+        error: 'Something went wrong!',
+        details: process.env.NODE_ENV === 'development' ? err.message : undefined
+    });
+});
+
 // Database Initialization and Server Start
 (async () => {
     try {
         await sequelize.authenticate();
         console.log('Connected to PostgreSQL database');
         
-        // Sync database (create tables if they don't exist)
-        await sequelize.sync();
+        // Sync database with {force: false} to prevent data loss
+        await sequelize.sync({ force: false });
         console.log('Database synchronized');
 
         app.listen(PORT, () => {
@@ -107,5 +122,6 @@ app.post('/api/contact', async (req, res) => {
         });
     } catch (error) {
         console.error('Unable to connect to the database:', error);
+        process.exit(1); // Exit if database connection fails
     }
 })();
