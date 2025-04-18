@@ -1,14 +1,17 @@
 services:
   - type: web
     name: portfolio-frontend
-    buildCommand: npm install
+    runtime: static
+    buildCommand: null
     staticPublishPath: ./
-    envVars:
-      - key: NODE_VERSION
-        value: 18.x
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: no-cache
 
   - type: web
     name: portfolio-backend
+    runtime: nodejs
     rootDir: backend
     buildCommand: npm install
     startCommand: node server.js
