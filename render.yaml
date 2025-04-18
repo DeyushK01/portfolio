@@ -11,7 +11,7 @@ services:
 
   - type: web
     name: portfolio-backend
-    runtime: nodejs
+    runtime: node
     rootDir: backend
     buildCommand: npm install
     startCommand: node server.js
