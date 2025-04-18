@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Deyush Kulkarni - Software Developer Portfolio | Web Development, Software Engineering, and Full-Stack Solutions">
+    <title>Deyush Kulkarni | Software Developer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="video-background">
+        <video autoplay muted loop playsinline>
+            <source src="assets/FallingStars5Videvo.mp4" type="video/mp4">
+        </video>
+    </div>
+    <canvas id="particle-canvas"></canvas>
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <header>
+        <nav>
+            <a href="#" class="nav-logo">
+                <i class="fas fa-code"></i>
+                <!-- <span>DK</span> -->
+            </a>
+            <ul>
+                <li><a href="#hero" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero" class="fade-in">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="welcome-text">Welcome to my portfolio</h1>
+                    <h2 class="dynamic-text">I'm Deyush Kulkarni</h2>
+                    <div class="typewriter">
+                        <span class="typed-text"></span><span class="cursor">&nbsp;</span>
+                    </div>
+                    <p class="hero-description">A passionate Data Analyst and Software Developer focused on creating impactful solutions through data-driven insights and innovative technology.</p>
+                    <div class="cta-buttons">
+                        <a href="#projects" class="primary-btn">View My Work</a>
+                        <a href="#contact" class="secondary-btn">Get in Touch</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="fade-in">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <!-- <div class="contact-info">
+                    <p>📧 deyushkulkarni19@gmail.com</p>
+                    <p>📱 +91-9768448786</p>
+                    <p>🔗 <a href="https://www.linkedin.com/in/deyushkulkarni/" target="_blank">LinkedIn</a></p>
+                    <p>💻 <a href="https://github.com/DeyushK01" target="_blank">GitHub</a></p>
+                </div> -->
+                <div class="about-text">
+                    <p>I'm a software developer with expertise in web development and software engineering. I focus on creating efficient, scalable solutions while maintaining clean, maintainable code.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="fade-in">
+            <h2>Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3><i class="fas fa-code"></i> Development</h3>
+                    <div class="skills-list">
+                        <div class="skill-tag"><i class="fab fa-python"></i> Python</div>
+                        <div class="skill-tag"><i class="fab fa-cpp"></i> C++</div>
+                        <div class="skill-tag"><i class="fab fa-js"></i> JavaScript</div>
+                        <div class="skill-tag"><i class="fab fa-react"></i> React.js</div>
+                        <div class="skill-tag"><i class="fab fa-html5"></i> HTML5</div>
+                        <div class="skill-tag"><i class="fab fa-css3-alt"></i> CSS3</div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3><i class="fas fa-database"></i> Data & Analytics</h3>
+                    <div class="skills-list">
+                        <div class="skill-tag"><i class="fas fa-chart-bar"></i> Data Analysis</div>
+                        <div class="skill-tag"><i class="fas fa-brain"></i> Machine Learning</div>
+                        <div class="skill-tag"><i class="fas fa-database"></i> MongoDB</div>
+                        <div class="skill-tag"><i class="fas fa-table"></i> SQL</div>
+                        <div class="skill-tag"><i class="fas fa-chart-line"></i> Visualization</div>
+                        <div class="skill-tag"><i class="fas fa-robot"></i> NLP</div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3><i class="fas fa-tools"></i> Tools & Technologies</h3>
+                    <div class="skills-list">
+                        <div class="skill-tag"><i class="fab fa-git-alt"></i> Git</div>
+                        <div class="skill-tag"><i class="fab fa-docker"></i> Docker</div>
+                        <div class="skill-tag"><i class="fab fa-linux"></i> Linux</div>
+                        <div class="skill-tag"><i class="fas fa-server"></i> REST APIs</div>
+                        <div class="skill-tag"><i class="fas fa-cloud"></i> Cloud Services</div>
+                        <div class="skill-tag"><i class="fas fa-terminal"></i> Shell Scripting</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="fade-in">
+            <h2>Projects</h2>
+            <div class="project-grid">
+                <div class="project-card">
+                    <div class="project-content">
+                        <div class="project-header">
+                            <i class="fas fa-newspaper project-icon"></i>
+                            <h3>News Notification System</h3>
+                        </div>
+                        <p>Automated news notification system leveraging Python and MongoDB, featuring real-time insights and smart summarization using Transformers model.</p>
+                        <div class="project-tech">
+                            <span>Python</span>
+                            <span>Selenium</span>
+                            <span>Newspaper3k</span>
+                            <span>MongoDB</span>
+                        </div>
+                        <ul class="project-highlights">
+                            <li>Automated news retrieval and storage system</li>
+                            <li>Real-time data visualization</li>
+                            <li>AI-powered news summarization</li>
+                            <li>Microsoft Teams integration with Adaptive Cards</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-content">
+                        <div class="project-header">
+                            <i class="fas fa-flask project-icon"></i>
+                            <h3>Chemical Drug Molecular Generation</h3>
+                        </div>
+                        <p>User-friendly system for generating 2D chemical drug molecule combinations using machine learning models.</p>
+                        <div class="project-tech">
+                            <span>Python</span>
+                            <span>HTML</span>
+                            <span>Flask</span>
+                        </div>
+                        <ul class="project-highlights">
+                            <li>Machine learning-based molecule generation</li>
+                            <li>User preference-based customization</li>
+                            <li>Interactive web interface</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-content">
+                        <div class="project-header">
+                            <i class="fas fa-heartbeat project-icon"></i>
+                            <h3>Wolf Parkinson White Syndrome Detection</h3>
+                        </div>
+                        <p>Developed a 6-layer CNN Model achieving 96% accuracy in detecting Wolff Parkinson White Syndrome from ECG data.</p>
+                        <div class="project-tech">
+                            <span>Python</span>
+                            <span>HTML</span>
+                            <span>TensorFlow</span>
+                            <span>Keras</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-content">
+                        <div class="project-header">
+                            <i class="fas fa-chart-bar project-icon"></i>
+                            <h3>Product Review Sentiment Analysis</h3>
+                        </div>
+                        <p>Analysis and visualization of customer sentiment data for actionable business insights.</p>
+                        <div class="project-tech">
+                            <span>Python</span>
+                            <span>Data Analysis</span>
+                            <span>NLP</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-content">
+                        <div class="project-header">
+                            <i class="fas fa-vote-yea project-icon"></i>
+                            <h3>College Voting System</h3>
+                        </div>
+                        <p>Comprehensive web portal for college elections, event registration, and committee applications.</p>
+                        <div class="project-tech">
+                            <span>HTML</span>
+                            <span>PHP</span>
+                            <span>MySQL</span>
+                        </div>
+                        <ul class="project-highlights">
+                            <li>Streamlined college event management</li>
+                            <li>Reduced communication spam</li>
+                            <li>Integrated committee registration</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery" class="fade-in">
+            <h2>Project Gallery</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item" data-category="web">
+                    <img src="assets/College-voting.jpg" alt="Project 1">
+                    <div class="gallery-overlay">
+                        <h3>College Voting System</h3>
+                        <p>Streamlined college event management</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="ml">
+                    <img src="assets/CMW.jpg" alt="Project 2">
+                    <div class="gallery-overlay">
+                        <h3>Drug Molecule Generation</h3>
+                        <p>ML-powered molecular structure generation</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="data">
+                    <img src="assets/WPW.jpg" alt="Project 3">
+                    <div class="gallery-overlay">
+                        <h3>WPW Syndrome Detection</h3>
+                        <p>CNN-based medical diagnosis system</p>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-filter">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="web">Web Dev</button>
+                <button class="filter-btn" data-filter="ml">Machine Learning</button>
+                <button class="filter-btn" data-filter="data">Data Analysis</button>
+            </div>
+        </section>
+
+        <div class="lightbox">
+            <span class="lightbox-close">&times;</span>
+            <img class="lightbox-content">
+            <div class="lightbox-caption"></div>
+        </div>
+
+        <section id="timeline" class="fade-in">
+            <h2>Professional Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content left">
+                        <div class="timeline-date">Present</div>
+                        <h3>Data Analyst</h3>
+                        <h4>Ultraviolette Automotive Pvt Ltd</h4>
+                        <ul>
+                            <li>Developed interactive data visualizations using Dash and Plotly</li>
+                            <li>Improved data retrieval speeds by 40%</li>
+                            <li>Increased decision-making efficiency by over 25% through real-time analytics</li>
+                            <li>Improved fault detection by 50% through real-time telemetry integration</li>
+                            <li>Collaborated with cross-functional teams to define and refine metrics</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content right">
+                        <div class="timeline-date">2024/01 – 2024/07</div>
+                        <h3>Intern</h3>
+                        <h4>Jio Platforms Limited</h4>
+                        <ul>
+                            <li>Developed a data-driven News-Notification System</li>
+                            <li>Automated data processes with Python, reducing manual effort by 60%</li>
+                            <li>Enhanced customer engagement for IoT-based device applications</li>
+                            <li>Analyzed key factors influencing data for improved insights</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content left">
+                        <div class="timeline-date">2023/05 – 2023/07</div>
+                        <h3>Intern</h3>
+                        <h4>Jio Platforms Limited</h4>
+                        <ul>
+                            <li>Worked on automation testing with focus on data integrity</li>
+                            <li>Developed and executed test cases for web automation</li>
+                            <li>Utilized Selenium and Robot Framework libraries</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="fade-in">
+            <h2>Contact Me</h2>
+            <p class="contact-description">Let's collaborate on creating innovative solutions together!</p>
+            <div class="contact-container">
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3>Email</h3>
+                        <p>deyushkulkarni19@gmail.com</p>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <h3>Phone</h3>
+                        <p>+91 9768448786</p>
+                    </div>
+                    <div class="contact-card">
+                        <a href="https://www.linkedin.com/in/deyushkulkarni/" target="_blank">
+                            <div class="contact-icon">
+                                <i class="fab fa-linkedin"></i>
+                            </div>
+                            <h3>LinkedIn</h3>
+                            <p>Connect with me</p>
+                        </a>
+                    </div>
+                    <div class="contact-card">
+                        <a href="https://github.com/DeyushK01" target="_blank">
+                            <div class="contact-icon">
+                                <i class="fab fa-github"></i>
+                            </div>
+                            <h3>GitHub</h3>
+                            <p>View my repositories</p>
+                        </a>
+                    </div>
+                </div>
+                <form id="contact-form" class="contact-form">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" required>
+                        <label for="name">Your Name</label>
+                        <span class="validation-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" required>
+                        <label for="email">Your Email</label>
+                        <span class="validation-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" required></textarea>
+                        <label for="message">Your Message</label>
+                        <span class="validation-message"></span>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        Send Message <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Deyush Kulkarni. All rights reserved.</p>
+            <div class="social-links">
+                <a href="https://github.com/DeyushK01" target="_blank" aria-label="GitHub Profile">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/deyushkulkarni/" target="_blank" aria-label="LinkedIn Profile">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="mailto:deyushkulkarni19@gmail.com" aria-label="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <button class="scroll-to-top" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>

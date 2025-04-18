@@ -1,0 +1,16 @@
+node_modules/
+.env
+.DS_Store
+*.log
+nodesource_setup.sh
+node_modules/
+.env
+.DS_Store
+*.log
+nodesource_setup.sh
+# Add these additional rules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.yarn-integrity
