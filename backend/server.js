@@ -10,7 +10,9 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors({
-    origin: process.env.NODE_ENV === 'production' ? ['https://your-domain.onrender.com'] : '*',
+    origin: process.env.NODE_ENV === 'production' 
+        ? ['https://portfolio-frontend-34b0.onrender.com']
+        : '*',
     methods: ['POST', 'GET', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));

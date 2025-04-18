@@ -209,9 +209,9 @@ document.addEventListener('DOMContentLoaded', () => {
             };
             
             try {
-                const apiUrl = window.location.hostname === 'localhost' 
-                    ? 'http://localhost:3000/api/contact'
-                    : '/api/contact';
+                const apiUrl = window.location.hostname.includes('render.com')
+                    ? 'https://portfolio-backend-34b0.onrender.com/api/contact'
+                    : 'http://localhost:3000/api/contact';
                     
                 const response = await fetch(apiUrl, {
                     method: 'POST',
