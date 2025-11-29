@@ -17,37 +17,43 @@
     <canvas id="particle-canvas"></canvas>
     <div class="cursor-dot"></div>
     <div class="cursor-outline"></div>
+    <div class="mouse-follower"></div>
 
     <header>
-        <nav>
-            <a href="#" class="nav-logo">
-                <i class="fas fa-code"></i>
-                <!-- <span>DK</span> -->
-            </a>
-            <ul>
-                <li><a href="#hero" class="nav-link">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#skills" class="nav-link">Skills</a></li>
-                <li><a href="#projects" class="nav-link">Projects</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="#" class="nav-logo">
+                    <i class="fas fa-code"></i>
+                </a>
+                <div class="nav-menu">
+                    <ul>
+                        <li><a href="#hero" class="nav-link">Home</a></li>
+                        <li><a href="#about" class="nav-link">About</a></li>
+                        <li><a href="#skills" class="nav-link">Skills</a></li>
+                        <li><a href="#projects" class="nav-link">Projects</a></li>
+                        <li><a href="#contact" class="nav-link">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
         </nav>
     </header>
 
     <main>
-        <section id="hero" class="fade-in">
-            <div class="hero-content">
+        <section id="hero" class="fade-in hero-section">
+            <div class="hero-container">
                 <div class="hero-text">
                     <h1 class="welcome-text">Welcome to my portfolio</h1>
                     <h2 class="dynamic-text">I'm Deyush Kulkarni</h2>
                     <div class="typewriter">
                         <span class="typed-text"></span><span class="cursor">&nbsp;</span>
                     </div>
-                    <!-- <p class="hero-description">A passionate Data Analyst and Software Developer focused on creating impactful solutions through data-driven insights and innovative technology.</p> -->
                     <div class="cta-buttons">
                         <a href="#projects" class="primary-btn">View My Work</a>
                         <a href="#contact" class="secondary-btn">Get in Touch</a>
                     </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-shape"></div>
                 </div>
             </div>
         </section>
@@ -155,11 +161,17 @@
             </div>
         </section>
 
-        <section id="projects" class="fade-in">
-            <h2>Projects</h2>
-            <div class="project-grid">
-                <div class="project-card">
-                    <div class="project-content">
+        <section id="projects" class="fade-in projects-section">
+            <div class="projects-header">
+                <h2>Featured Projects</h2>
+                <p class="projects-subtitle">Innovative solutions built with cutting-edge technology</p>
+            </div>
+            
+            <div class="carousel-container">
+                <div class="carousel-track">
+                    <div class="project-card">
+                        <div class="card-number">01</div>
+                        <div class="card-glow"></div>
                         <div class="project-header">
                             <i class="fas fa-newspaper project-icon"></i>
                             <h3>News Notification System</h3>
@@ -178,9 +190,9 @@
                             <li>Microsoft Teams integration with Adaptive Cards</li>
                         </ul>
                     </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-content">
+                    <div class="project-card">
+                        <div class="card-number">02</div>
+                        <div class="card-glow"></div>
                         <div class="project-header">
                             <i class="fas fa-flask project-icon"></i>
                             <h3>Chemical Drug Molecular Generation</h3>
@@ -197,12 +209,12 @@
                             <li>Interactive web interface</li>
                         </ul>
                     </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-content">
+                    <div class="project-card">
+                        <div class="card-number">03</div>
+                        <div class="card-glow"></div>
                         <div class="project-header">
                             <i class="fas fa-heartbeat project-icon"></i>
-                            <h3>Wolf Parkinson White Syndrome Detection</h3>
+                            <h3>Wolff Parkinson White Syndrome Detection</h3>
                         </div>
                         <p>Developed a 6-layer CNN Model achieving 96% accuracy in detecting Wolff Parkinson White Syndrome from ECG data.</p>
                         <div class="project-tech">
@@ -211,10 +223,15 @@
                             <span>TensorFlow</span>
                             <span>Keras</span>
                         </div>
+                        <ul class="project-highlights">
+                            <li>Architected and trained a 6-layer CNN for ECG time-series classification, achieving 96% accuracy in WPW syndrome detection.</li>
+                            <li>Implemented signal denoising, normalization, and windowing to enhance feature extraction and generalization.</li>
+                            <li>Granted copyright for the model and implementation, validating originality and technical ownership.</li>
+                        </ul>
                     </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-content">
+                    <div class="project-card">
+                        <div class="card-number">04</div>
+                        <div class="card-glow"></div>
                         <div class="project-header">
                             <i class="fas fa-chart-bar project-icon"></i>
                             <h3>Product Review Sentiment Analysis</h3>
@@ -225,10 +242,15 @@
                             <span>Data Analysis</span>
                             <span>NLP</span>
                         </div>
+                        <ul class="project-highlights">
+                            <li>Analyzed large-scale customer sentiment data and identify key drivers of satisfaction and churn, enabling data-backed decisions.</li>
+                            <li>Tracked sentiment trends, category performance, and anomaly spikes in real time.</li>
+                            <li>Translated raw text feedback into actionable insights using NLP techniques (cleaning, scoring, classification), improving response prioritization and strategy.</li>
+                        </ul>
                     </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-content">
+                    <div class="project-card">
+                        <div class="card-number">05</div>
+                        <div class="card-glow"></div>
                         <div class="project-header">
                             <i class="fas fa-vote-yea project-icon"></i>
                             <h3>College Voting System</h3>
@@ -245,6 +267,22 @@
                             <li>Integrated committee registration</li>
                         </ul>
                     </div>
+                </div>
+
+                <div class="carousel-controls">
+                    <button class="carousel-btn prev-btn" aria-label="Previous project">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="carousel-indicators">
+                        <div class="indicator active" data-index="0"></div>
+                        <div class="indicator" data-index="1"></div>
+                        <div class="indicator" data-index="2"></div>
+                        <div class="indicator" data-index="3"></div>
+                        <div class="indicator" data-index="4"></div>
+                    </div>
+                    <button class="carousel-btn next-btn" aria-label="Next project">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
                 </div>
             </div>
         </section>

@@ -1,4 +1,7 @@
-// Smooth scroll for navigation
+// ============================================================================
+// SMOOTH SCROLLING & NAVIGATION
+// ============================================================================
+
 document.querySelectorAll('nav a').forEach(link => {
     link.addEventListener('click', (e) => {
         e.preventDefault();
@@ -15,19 +18,12 @@ document.querySelectorAll('nav a').forEach(link => {
     });
 });
 
-// Add scroll progress indicator
+// ============================================================================
+// SCROLL PROGRESS INDICATOR
+// ============================================================================
+
 const progressBar = document.createElement('div');
 progressBar.className = 'scroll-progress';
-progressBar.style.cssText = `
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 0%;
-    height: 3px;
-    background: linear-gradient(90deg, var(--accent-color), var(--accent-secondary));
-    z-index: 1001;
-    transition: width 0.2s ease;
-`;
 document.body.appendChild(progressBar);
 
 window.addEventListener('scroll', () => {
@@ -36,26 +32,31 @@ window.addEventListener('scroll', () => {
     progressBar.style.width = `${progress}%`;
 });
 
-// Header scroll behavior
+// ============================================================================
+// HEADER SCROLL BEHAVIOR
+// ============================================================================
+
 const header = document.querySelector('header');
 let lastScroll = 0;
 
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
     
-    // Add box shadow and background opacity based on scroll
     if (currentScroll > 50) {
         header.style.boxShadow = '0 10px 30px -10px rgba(2, 12, 27, 0.7)';
         header.style.backgroundColor = 'rgba(15, 23, 42, 0.95)';
     } else {
         header.style.boxShadow = 'none';
-        header.style.backgroundColor = 'rgba(15, 23, 42, 0.9)';
+        header.style.backgroundColor = 'rgba(15, 23, 42, 0.85)';
     }
     
     lastScroll = currentScroll;
 });
 
-// Scroll to top functionality
+// ============================================================================
+// SCROLL TO TOP FUNCTIONALITY
+// ============================================================================
+
 const scrollToTopBtn = document.querySelector('.scroll-to-top');
 
 window.addEventListener('scroll', () => {
@@ -73,92 +74,117 @@ scrollToTopBtn.addEventListener('click', () => {
     });
 });
 
-// Intersection Observer for fade-in animations
+// ============================================================================
+// INTERSECTION OBSERVER FOR ANIMATIONS
+// ============================================================================
+
 const observerOptions = {
     root: null,
-    rootMargin: '0px',
-    threshold: 0.2
+    rootMargin: '-50px',
+    threshold: 0.1
 };
 
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('visible');
-            if (entry.target.classList.contains('skill-category')) {
-                animateSkillCategory(entry.target);
-            }
         }
     });
 }, observerOptions);
 
-// Observe all sections and skill items
-document.querySelectorAll('section, .skill-category').forEach(element => {
+document.querySelectorAll('section').forEach(element => {
     observer.observe(element);
 });
 
-// Animate skill categories with a stagger effect
-function animateSkillCategory(category) {
-    const items = category.querySelectorAll('li');
-    items.forEach((item, index) => {
+// ============================================================================
+// TYPING ANIMATION FOR HERO SECTION
+// ============================================================================
+
+const texts = [
+    "Data Analyst",
+    "Tech Enthusiast",
+    "Problem Solver",
+    "innovator",
+];
+
+let textIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+let typingDelay = 100;
+let erasingDelay = 50;
+let newTextDelay = 2000;
+
+function typeAnimation() {
+    const typedTextSpan = document.querySelector('.typed-text');
+    if (!typedTextSpan) return;
+    
+    const currentText = texts[textIndex];
+    
+    if (isDeleting) {
+        typedTextSpan.textContent = currentText.substring(0, charIndex - 1);
+        charIndex--;
+    } else {
+        typedTextSpan.textContent = currentText.substring(0, charIndex + 1);
+        charIndex++;
+    }
+    
+    if (!isDeleting && charIndex === currentText.length) {
         setTimeout(() => {
-            item.style.opacity = '1';
-            item.style.transform = 'translateX(0)';
-        }, index * 100);
-    });
-}
-
-// Enhance skill category animations
-document.querySelectorAll('.skill-category').forEach(category => {
-    category.addEventListener('mouseenter', () => {
-        const items = category.querySelectorAll('li');
-        items.forEach((item, index) => {
-            item.style.transform = 'translateX(10px)';
-            item.style.transition = `transform 0.3s ease ${index * 0.1}s`;
-        });
-    });
-    
-    category.addEventListener('mouseleave', () => {
-        const items = category.querySelectorAll('li');
-        items.forEach(item => {
-            item.style.transform = 'translateX(0)';
-        });
-    });
-});
-
-// Initialize skill items style
-document.querySelectorAll('.skill-category li').forEach(item => {
-    item.style.opacity = '0';
-    item.style.transform = 'translateX(-20px)';
-    item.style.transition = 'all 0.3s ease';
-});
-
-// Typing effect for hero section
-function typeEffect(element, text, speed = 100) {
-    let i = 0;
-    element.innerHTML = '';
-    
-    function typing() {
-        if (i < text.length) {
-            element.innerHTML += text.charAt(i);
-            i++;
-            setTimeout(typing, speed);
-        }
+            isDeleting = true;
+        }, newTextDelay);
+    } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        textIndex = (textIndex + 1) % texts.length;
     }
     
-    typing();
+    setTimeout(typeAnimation, isDeleting ? erasingDelay : typingDelay);
 }
 
-// Apply typing effect to hero section
 window.addEventListener('load', () => {
-    const heroText = document.querySelector('#hero p');
-    if (heroText) {
-        typeEffect(heroText, heroText.textContent);
+    typeAnimation();
+});
+
+// ============================================================================
+// CUSTOM CURSOR
+// ============================================================================
+
+const cursorDot = document.querySelector('.cursor-dot');
+const cursorOutline = document.querySelector('.cursor-outline');
+
+let mouseX = 0;
+let mouseY = 0;
+
+document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    
+    if (cursorDot && cursorOutline) {
+        cursorDot.style.left = mouseX + 'px';
+        cursorDot.style.top = mouseY + 'px';
+        cursorDot.style.opacity = '1';
+        cursorOutline.style.opacity = '1';
+        
+        setTimeout(() => {
+            cursorOutline.style.left = mouseX + 'px';
+            cursorOutline.style.top = mouseY + 'px';
+        }, 50);
     }
 });
 
-// Form validation and submission
+document.addEventListener('mouseleave', () => {
+    if (cursorDot && cursorOutline) {
+        cursorDot.style.opacity = '0';
+        cursorOutline.style.opacity = '0';
+    }
+});
+
+// ============================================================================
+// FORM VALIDATION AND SUBMISSION
+// ============================================================================
+
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('contact-form');
+    if (!form) return;
     
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -170,7 +196,6 @@ document.addEventListener('DOMContentLoaded', () => {
         
         let isValid = true;
         
-        // Clear any existing messages
         const existingMessages = form.querySelectorAll('.success-message, .error-message');
         existingMessages.forEach(msg => msg.remove());
         
@@ -227,7 +252,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     throw new Error(data.error || data.details || 'Failed to send message');
                 }
 
-                // Show success message
                 const successMessage = document.createElement('div');
                 successMessage.className = 'success-message';
                 successMessage.innerHTML = `
@@ -243,7 +267,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 errorMessage.className = 'error-message';
                 errorMessage.innerHTML = `
                     <i class="fas fa-exclamation-circle"></i>
-                    <span>Error sending message: ${error.message}</span>
+                    <span>Error: ${error.message}</span>
                 `;
                 form.insertBefore(errorMessage, button);
             } finally {
@@ -254,7 +278,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Helper functions for showing/removing errors
 function showError(input, message) {
     const formGroup = input.parentElement;
     const errorDiv = formGroup.querySelector('.validation-message') || document.createElement('div');
@@ -275,282 +298,283 @@ function removeError(input) {
     formGroup.classList.remove('error');
 }
 
-// Contact cards hover effect
-document.querySelectorAll('.contact-card').forEach(card => {
-    card.addEventListener('mouseenter', () => {
-        card.querySelector('.contact-icon i').style.transform = 'scale(1.2) rotate(5deg)';
-    });
-    
-    card.addEventListener('mouseleave', () => {
-        card.querySelector('.contact-icon i').style.transform = 'scale(1) rotate(0)';
-    });
-});
+// ============================================================================
+// CREATIVE PROJECT CAROUSEL
+// ============================================================================
 
-// Typing effect text content
-const texts = [
-    "Data Analyst",
-    "Tech Enthusiast",
-    "Problem Solver",
-    "Car Enthusiast",
-];
-
-let textIndex = 0;
-let charIndex = 0;
-let isDeleting = false;
-let typingDelay = 100;
-let erasingDelay = 50;
-let newTextDelay = 2000;
-
-function typeAnimation() {
-    const typedTextSpan = document.querySelector('.typed-text');
-    const currentText = texts[textIndex];
-    
-    if (isDeleting) {
-        typedTextSpan.textContent = currentText.substring(0, charIndex - 1);
-        charIndex--;
-    } else {
-        typedTextSpan.textContent = currentText.substring(0, charIndex + 1);
-        charIndex++;
-    }
-    
-    if (!isDeleting && charIndex === currentText.length) {
-        // Pause at end of typing
-        setTimeout(() => {
-            isDeleting = true;
-        }, newTextDelay);
-    } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        textIndex = (textIndex + 1) % texts.length;
-    }
-    
-    setTimeout(typeAnimation, isDeleting ? erasingDelay : typingDelay);
-}
-
-// Start the typing animation when the page loads
-window.addEventListener('load', () => {
-    typeAnimation();
-});
-
-// Custom cursor
-const cursorDot = document.querySelector('.cursor-dot');
-const cursorOutline = document.querySelector('.cursor-outline');
-
-document.addEventListener('mousemove', (e) => {
-    if (cursorDot && cursorOutline) {
-        cursorDot.style.left = e.clientX + 'px';
-        cursorDot.style.top = e.clientY + 'px';
-        
-        // Add slight delay to outline for smooth effect
-        setTimeout(() => {
-            cursorOutline.style.left = e.clientX + 'px';
-            cursorOutline.style.top = e.clientY + 'px';
-        }, 50);
-    }
-});
-
-// Project Carousel
-const projectGrid = document.querySelector('.project-grid');
-let currentPosition = 0;
+const carouselTrack = document.querySelector('.carousel-track');
 const projectCards = document.querySelectorAll('.project-card');
-const cardWidth = 300 + 32; // card width + gap
-let autoScrollInterval;
-let isPaused = false;
+const prevBtn = document.querySelector('.prev-btn');
+const nextBtn = document.querySelector('.next-btn');
+const indicators = document.querySelectorAll('.indicator');
 
-let lastTouchTime = 0;
-let touchVelocity = 0;
+let currentIndex = 0;
+let autoScrollInterval;
 let isTransitioning = false;
 
-function slideProjects(direction, options = {}) {
-    if (isTransitioning && !options.ignoreTransition) return;
-    
-    const totalWidth = cardWidth * projectCards.length;
-    const transitionDuration = options.duration || 0.5;
-    const transitionTiming = options.timing || 'cubic-bezier(0.4, 0.0, 0.2, 1)';
-    
+function updateCarousel() {
+    if (isTransitioning) return;
     isTransitioning = true;
-    currentPosition += (direction === 'next' ? -cardWidth : cardWidth) * (options.multiplier || 1);
 
-    projectGrid.style.transition = `transform ${transitionDuration}s ${transitionTiming}`;
-    projectGrid.style.transform = `translate3d(${currentPosition}px, 0, 0)`;
+    // Remove active class from all cards and indicators
+    projectCards.forEach(card => card.classList.remove('active'));
+    indicators.forEach(ind => ind.classList.remove('active'));
 
-    // Check if we need to reset position
+    // Add active class to current card and indicator
+    projectCards[currentIndex].classList.add('active');
+    indicators[currentIndex].classList.add('active');
+
+    // Calculate the offset - move track so active card is centered
+    const offset = -(currentIndex * 100);
+    carouselTrack.style.transform = `translateX(${offset}%)`;
+
     setTimeout(() => {
-        if (direction === 'next' && currentPosition <= -(totalWidth + cardWidth * 2)) {
-            // Reset to start
-            projectGrid.style.transition = 'none';
-            currentPosition = -cardWidth * 3;
-            projectGrid.style.transform = `translate3d(${currentPosition}px, 0, 0)`;
-        } else if (direction === 'prev' && currentPosition >= -cardWidth * 2) {
-            // Reset to end
-            projectGrid.style.transition = 'none';
-            currentPosition = -(totalWidth - cardWidth * 3);
-            projectGrid.style.transform = `translate3d(${currentPosition}px, 0, 0)`;
-        }
-        
-        // Allow next transition after reset
-        setTimeout(() => {
-            isTransitioning = false;
-        }, 50);
-    }, transitionDuration * 1000);
+        isTransitioning = false;
+    }, 600);
 }
 
-function setupInfiniteScroll() {
-    if (projectGrid && projectCards.length) {
-        // Enable hardware acceleration
-        projectGrid.style.transform = 'translate3d(0, 0, 0)';
-        projectGrid.style.backfaceVisibility = 'hidden';
-        projectGrid.style.perspective = '1000px';
-        
-        // Clone cards for infinite effect
-        const cardsToClone = Array.from(projectCards).slice(0, 3);
-        cardsToClone.forEach(card => {
-            const clone = card.cloneNode(true);
-            projectGrid.appendChild(clone);
-        });
-
-        const lastCardsToClone = Array.from(projectCards).slice(-3);
-        lastCardsToClone.reverse().forEach(card => {
-            const clone = card.cloneNode(true);
-            projectGrid.insertBefore(clone, projectGrid.firstChild);
-        });
-
-        currentPosition = -cardWidth * 3;
-        projectGrid.style.transform = `translate3d(${currentPosition}px, 0, 0)`;
-    }
+function nextSlide() {
+    currentIndex = (currentIndex + 1) % projectCards.length;
+    updateCarousel();
+    resetAutoScroll();
 }
 
-function createCarouselControls() {
-    const controls = document.createElement('div');
-    controls.className = 'carousel-controls';
-    controls.innerHTML = `
-        <button class="prev-btn" aria-label="Previous project">
-            <i class="fas fa-chevron-left"></i>
-        </button>
-        <button class="next-btn" aria-label="Next project">
-            <i class="fas fa-chevron-right"></i>
-        </button>
-    `;
-    
-    document.querySelector('#projects').appendChild(controls);
-    
-    controls.querySelector('.prev-btn').addEventListener('click', () => {
-        pauseAutoScroll();
-        slideProjects('prev');
-    });
-    
-    controls.querySelector('.next-btn').addEventListener('click', () => {
-        pauseAutoScroll();
-        slideProjects('next');
-    });
+function prevSlide() {
+    currentIndex = (currentIndex - 1 + projectCards.length) % projectCards.length;
+    updateCarousel();
+    resetAutoScroll();
+}
+
+function goToSlide(index) {
+    currentIndex = index;
+    updateCarousel();
+    resetAutoScroll();
 }
 
 function startAutoScroll() {
-    if (!autoScrollInterval && !isPaused) {
-        autoScrollInterval = setInterval(() => {
-            slideProjects('next');
-        }, 3000); // Scroll every 3 seconds
+    autoScrollInterval = setInterval(nextSlide, 5000);
+}
+
+function resetAutoScroll() {
+    clearInterval(autoScrollInterval);
+    startAutoScroll();
+}
+
+// Event listeners
+if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+
+indicators.forEach((indicator, index) => {
+    indicator.addEventListener('click', () => goToSlide(index));
+});
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') prevSlide();
+    if (e.key === 'ArrowRight') nextSlide();
+});
+
+// Pause on hover
+if (carouselTrack) {
+    carouselTrack.addEventListener('mouseenter', () => clearInterval(autoScrollInterval));
+    carouselTrack.addEventListener('mouseleave', startAutoScroll);
+}
+
+// Touch swipe support
+let touchStartX = 0;
+let touchEndX = 0;
+
+if (carouselTrack) {
+    carouselTrack.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        clearInterval(autoScrollInterval);
+    });
+
+    carouselTrack.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+        startAutoScroll();
+    });
+}
+
+function handleSwipe() {
+    const swipeThreshold = 50;
+    const diff = touchStartX - touchEndX;
+
+    if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0) {
+            nextSlide();
+        } else {
+            prevSlide();
+        }
     }
 }
 
-function pauseAutoScroll() {
-    isPaused = true;
-    clearInterval(autoScrollInterval);
-    autoScrollInterval = null;
-    
-    // Resume after 5 seconds of inactivity
-    setTimeout(() => {
-        isPaused = false;
-        startAutoScroll();
-    }, 5000);
-}
+// Handle window resize
+window.addEventListener('resize', () => {
+    updateCarousel();
+});
 
 // Initialize carousel
-if (projectGrid && projectCards.length) {
-    setupInfiniteScroll();
-    createCarouselControls();
-    
+if (carouselTrack && projectCards.length > 0) {
+    updateCarousel();
     startAutoScroll();
-    
-    projectGrid.addEventListener('mouseenter', pauseAutoScroll);
-    projectGrid.addEventListener('mouseleave', () => {
-        isPaused = false;
-        startAutoScroll();
+}
+
+// ============================================================================
+// GALLERY LIGHTBOX
+// ============================================================================
+
+const galleryItems = document.querySelectorAll('.gallery-item');
+const lightbox = document.querySelector('.lightbox');
+const lightboxContent = document.querySelector('.lightbox-content');
+const lightboxCaption = document.querySelector('.lightbox-caption');
+const lightboxClose = document.querySelector('.lightbox-close');
+
+if (galleryItems.length > 0 && lightbox) {
+    galleryItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const img = item.querySelector('img');
+            const title = item.querySelector('.gallery-overlay h3').textContent;
+            const description = item.querySelector('.gallery-overlay p').textContent;
+            
+            lightboxContent.src = img.src;
+            lightboxCaption.innerHTML = `<strong>${title}</strong><br>${description}`;
+            lightbox.classList.add('active');
+        });
     });
     
-    // Enhanced touch support with velocity
-    let touchStartX = 0;
-    let touchStartTime = 0;
-    let lastTouchX = 0;
-    let isDragging = false;
-    let startPosition = 0;
-
-    projectGrid.addEventListener('touchstart', e => {
-        if (isTransitioning) return;
-        
-        isDragging = true;
-        touchStartX = e.touches[0].clientX;
-        lastTouchX = touchStartX;
-        touchStartTime = Date.now();
-        startPosition = currentPosition;
-        
-        projectGrid.style.transition = 'none';
-        pauseAutoScroll();
+    lightboxClose.addEventListener('click', () => {
+        lightbox.classList.remove('active');
     });
-
-    projectGrid.addEventListener('touchmove', e => {
-        if (!isDragging) return;
-        
-        const touch = e.touches[0];
-        const diff = touch.clientX - touchStartX;
-        const now = Date.now();
-        
-        // Calculate velocity
-        touchVelocity = (touch.clientX - lastTouchX) / (now - lastTouchTime);
-        lastTouchX = touch.clientX;
-        lastTouchTime = now;
-
-        // Update position with resistance at edges
-        currentPosition = startPosition + diff;
-        projectGrid.style.transform = `translate3d(${currentPosition}px, 0, 0)`;
-        
-        // Prevent default scrolling
-        e.preventDefault();
-    });
-
-    projectGrid.addEventListener('touchend', e => {
-        if (!isDragging) return;
-        isDragging = false;
-
-        const touchEndX = e.changedTouches[0].clientX;
-        const timeDiff = Date.now() - touchStartTime;
-        const distance = touchEndX - touchStartX;
-        
-        // Use velocity to determine number of slides to move
-        const velocity = Math.abs(touchVelocity);
-        let slidesToMove = 1;
-        
-        if (velocity > 1.5) slidesToMove = 2;
-        if (velocity > 2.5) slidesToMove = 3;
-
-        if (Math.abs(distance) > 50 || velocity > 0.8) {
-            slideProjects(
-                distance < 0 ? 'next' : 'prev',
-                {
-                    multiplier: slidesToMove,
-                    duration: 0.3 + (slidesToMove * 0.1),
-                    timing: 'cubic-bezier(0.4, 0.0, 0.2, 1)'
-                }
-            );
-        } else {
-            // Snap back to original position
-            projectGrid.style.transition = 'transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1)';
-            projectGrid.style.transform = `translate3d(${startPosition}px, 0, 0)`;
-            currentPosition = startPosition;
+    
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+            lightbox.classList.remove('active');
         }
     });
+}
 
-    // Handle edge cases
-    projectGrid.addEventListener('transitionend', () => {
-        isTransitioning = false;
+// ============================================================================
+// GALLERY FILTER
+// ============================================================================
+
+const filterBtns = document.querySelectorAll('.filter-btn');
+const filteredItems = document.querySelectorAll('.gallery-item');
+
+if (filterBtns.length > 0) {
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            const filterValue = btn.getAttribute('data-filter');
+            
+            filteredItems.forEach(item => {
+                if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                    item.style.display = 'block';
+                    item.style.animation = 'fadeInUp 0.5s ease';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    });
+    
+    // Set 'all' as default
+    filterBtns[0].classList.add('active');
+}
+
+// ============================================================================
+// PARTICLE CANVAS ANIMATION
+// ============================================================================
+
+const particleCanvas = document.getElementById('particle-canvas');
+if (particleCanvas) {
+    const ctx = particleCanvas.getContext('2d');
+    const particles = [];
+    
+    particleCanvas.width = window.innerWidth;
+    particleCanvas.height = window.innerHeight;
+    
+    class Particle {
+        constructor() {
+            this.x = Math.random() * particleCanvas.width;
+            this.y = Math.random() * particleCanvas.height;
+            this.size = Math.random() * 2 + 0.5;
+            this.speedX = Math.random() * 0.5 - 0.25;
+            this.speedY = Math.random() * 0.5 - 0.25;
+            this.opacity = Math.random() * 0.5 + 0.2;
+            this.fadeSpeed = Math.random() * 0.02 + 0.01;
+        }
+        
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            
+            if (this.x > particleCanvas.width) this.x = 0;
+            if (this.x < 0) this.x = particleCanvas.width;
+            if (this.y > particleCanvas.height) this.y = 0;
+            if (this.y < 0) this.y = particleCanvas.height;
+        }
+        
+        draw() {
+            ctx.fillStyle = `rgba(0, 217, 255, ${this.opacity})`;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+    
+    // Create particles
+    for (let i = 0; i < 50; i++) {
+        particles.push(new Particle());
+    }
+    
+    function animateParticles() {
+        ctx.clearRect(0, 0, particleCanvas.width, particleCanvas.height);
+        
+        for (let i = 0; i < particles.length; i++) {
+            particles[i].update();
+            particles[i].draw();
+        }
+        
+        requestAnimationFrame(animateParticles);
+    }
+    
+    animateParticles();
+    
+    // Resize handler
+    window.addEventListener('resize', () => {
+        particleCanvas.width = window.innerWidth;
+        particleCanvas.height = window.innerHeight;
     });
 }
+
+// ============================================================================
+// CONTACT CARD HOVER EFFECTS
+// ============================================================================
+
+document.querySelectorAll('.contact-card').forEach(card => {
+    card.addEventListener('mouseenter', function() {
+        const icon = this.querySelector('.contact-icon i');
+        if (icon) {
+            icon.style.transform = 'scale(1.2) rotate(8deg)';
+        }
+    });
+    
+    card.addEventListener('mouseleave', function() {
+        const icon = this.querySelector('.contact-icon i');
+        if (icon) {
+            icon.style.transform = 'scale(1) rotate(0)';
+        }
+    });
+});
+
+// ============================================================================
+// PAGE LOAD ANIMATIONS
+// ============================================================================
+
+window.addEventListener('load', () => {
+    document.body.style.opacity = '1';
+});
