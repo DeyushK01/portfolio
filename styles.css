@@ -431,7 +431,9 @@ section h2 {
 
 /* About section */
 #about {
-    background: linear-gradient(135deg, rgba(0, 217, 255, 0.027) 0%, transparent 100%);
+    /* background: linear-gradient(135deg, rgba(0, 217, 255, 0.027) 0%, transparent 100%); */
+    border-top: 1px solid rgba(0, 217, 255, 0.2);
+    border-bottom: 1px solid var(--card-border);
 }
 
 .about-content {
@@ -453,6 +455,8 @@ section h2 {
 /* Timeline section */
 #timeline {
     padding: 6rem 2rem;
+    /* border-top: 1px solid rgba(0, 217, 255, 0.2/); */
+    border-bottom: 1px solid var(--card-border);
 }
 
 .timeline {
@@ -1104,7 +1108,8 @@ section h2 {
 
 /* Contact section */
 #contact {
-    background: linear-gradient(135deg, rgba(0, 217, 255, 0.05) 0%, transparent 100%);
+    /* border-top: 1px solid rgba(0, 217, 255, 0.2); */
+    border-bottom: 1px solid var(--card-border);
 }
 
 .contact-description {
@@ -1112,6 +1117,252 @@ section h2 {
     color: var(--text-secondary);
     margin-bottom: 3rem;
     font-size: 1.1rem;
+}
+
+/* ============================================================================
+   ACHIEVEMENTS & CERTIFICATIONS SECTION
+   ============================================================================ */
+
+#achievements {
+    /* background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(20, 35, 60, 0.8)); */
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(0, 217, 255, 0.2);
+    border-bottom: 1px solid var(--card-border);
+    padding: 4rem 2rem;
+}
+
+#achievements h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 2.5rem;
+    background: linear-gradient(135deg, var(--accent-color), #00a8cc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.achievements-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+}
+
+.achievement-filters {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.achievement-filter-btn {
+    padding: 0.7rem 1.5rem;
+    background: rgba(0, 217, 255, 0.1);
+    border: 2px solid rgba(0, 217, 255, 0.3);
+    color: var(--accent-color);
+    border-radius: 25px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+}
+
+.achievement-filter-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 217, 255, 0.2), transparent);
+    transition: left 0.6s ease;
+}
+
+.achievement-filter-btn:hover {
+    border-color: var(--accent-color);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 217, 255, 0.2);
+}
+
+.achievement-filter-btn.active {
+    background: linear-gradient(135deg, var(--accent-color), rgba(0, 217, 255, 0.8));
+    color: #0f172a;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 20px rgba(0, 217, 255, 0.4);
+    transform: scale(1.05);
+}
+
+.achievement-filter-btn.active::before {
+    left: 100%;
+}
+
+.achievement-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 217, 255, 0.2);
+    border-radius: 15px;
+    padding: 2rem;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 300px;
+    animation: slideInCard 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    opacity: 0;
+}
+
+@keyframes slideInCard {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+        filter: blur(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+.achievement-card.hidden {
+    animation: slideOutCard 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    pointer-events: none;
+}
+
+@keyframes slideOutCard {
+    from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+        filter: blur(3px);
+    }
+}
+
+.achievement-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top right, rgba(0, 217, 255, 0.1), transparent);
+    pointer-events: none;
+}
+
+.achievement-card::after {
+    content: '';
+    position: absolute;
+    bottom: -50%;
+    right: -50%;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(0, 217, 255, 0.15), transparent);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.achievement-card:hover {
+    border-color: var(--accent-color);
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 217, 255, 0.2);
+}
+
+.achievement-card:hover::after {
+    opacity: 1;
+}
+
+.achievement-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--accent-color), rgba(0, 217, 255, 0.5));
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 2;
+    color: #0f172a;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+    box-shadow: 0 8px 20px rgba(0, 217, 255, 0.3);
+}
+
+.achievement-card:hover .achievement-icon {
+    transform: scale(1.15) rotate(10deg);
+    box-shadow: 0 12px 30px rgba(0, 217, 255, 0.5);
+}
+
+.achievement-card h3 {
+    font-size: 1.3rem;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 2;
+    line-height: 1.4;
+}
+
+.achievement-issuer {
+    color: var(--accent-color);
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    position: relative;
+    z-index: 2;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.achievement-desc {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 2;
+    flex-grow: 1;
+    transition: color 0.3s ease;
+}
+
+.achievement-card:hover .achievement-desc {
+    color: var(--text-primary);
+}
+.achievement-badge {
+    display: inline-block;
+    background: rgba(0, 217, 255, 0.15);
+    border: 1px solid rgba(0, 217, 255, 0.4);
+    color: var(--accent-color);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    position: relative;
+    z-index: 2;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    transition: all 0.3s ease;
+}
+
+.achievement-card:hover .achievement-badge {
+    background: rgba(0, 217, 255, 0.25);
+    border-color: var(--accent-color);
+    transform: translateX(5px);
 }
 
 .contact-container {
@@ -1497,6 +1748,25 @@ footer {
         flex-direction: column;
         text-align: center;
     }
+
+    .achievements-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .achievement-card {
+        min-height: 250px;
+    }
+
+    .achievement-filters {
+        gap: 0.8rem;
+        margin-bottom: 2rem;
+    }
+
+    .achievement-filter-btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.85rem;
+    }
     
     .social-links {
         justify-content: center;
@@ -1544,6 +1814,29 @@ footer {
     .nav-menu ul {
         gap: 0.8rem;
         font-size: 0.8rem;
+    }
+
+    #achievements h2 {
+        font-size: 2rem;
+    }
+
+    .achievements-grid {
+        gap: 1rem;
+    }
+
+    .achievement-card {
+        padding: 1.5rem;
+        min-height: 220px;
+    }
+
+    .achievement-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+
+    .achievement-card h3 {
+        font-size: 1.1rem;
     }
 }
 

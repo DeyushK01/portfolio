@@ -573,6 +573,72 @@ document.querySelectorAll('.contact-card').forEach(card => {
 });
 
 // ============================================================================
+// ACHIEVEMENTS FILTER FUNCTIONALITY
+// ============================================================================
+
+const achievementFilterBtns = document.querySelectorAll('.achievement-filter-btn');
+const achievementCards = document.querySelectorAll('.achievement-card');
+
+if (achievementFilterBtns.length > 0 && achievementCards.length > 0) {
+    achievementFilterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Update active button with smooth transition
+            achievementFilterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            const filterValue = btn.getAttribute('data-filter');
+            let visibleCount = 0;
+            const cardsToShow = [];
+            const cardsToHide = [];
+            
+            // Categorize cards
+            achievementCards.forEach((card) => {
+                const cardCategory = card.getAttribute('data-category');
+                const shouldShow = filterValue === 'all' || cardCategory === filterValue;
+                
+                if (shouldShow) {
+                    cardsToShow.push(card);
+                } else {
+                    cardsToHide.push(card);
+                }
+            });
+            
+            // Animate hidden cards out first
+            cardsToHide.forEach((card) => {
+                card.classList.add('hidden');
+                card.style.pointerEvents = 'none';
+            });
+            
+            // Then animate visible cards in with stagger
+            setTimeout(() => {
+                cardsToShow.forEach((card, index) => {
+                    card.classList.remove('hidden');
+                    card.style.display = 'flex';
+                    card.style.pointerEvents = 'auto';
+                    card.style.animation = 'none';
+                    
+                    // Force reflow to trigger animation
+                    void card.offsetWidth;
+                    
+                    setTimeout(() => {
+                        card.style.animation = `slideInCard 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards`;
+                    }, index * 60);
+                });
+            }, 150);
+            
+            // Clean up hidden cards after animation
+            setTimeout(() => {
+                cardsToHide.forEach((card) => {
+                    if (card.classList.contains('hidden')) {
+                        card.style.display = 'none';
+                    }
+                });
+            }, 450);
+        });
+    });
+}
+
+// ============================================================================
 // PAGE LOAD ANIMATIONS
 // ============================================================================
 
