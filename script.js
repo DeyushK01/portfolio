@@ -104,7 +104,8 @@ const texts = [
     "Data Analyst",
     "Tech Enthusiast",
     "Problem Solver",
-    "innovator",
+    "AI Explorer",
+    "Car Enthusiast"
 ];
 
 let textIndex = 0;
